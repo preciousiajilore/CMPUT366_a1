@@ -37,9 +37,11 @@ def main():
     
     nodes_expanded_dijkstra = []  
     nodes_expanded_astar = []
+    nodes_expanded_wastar = []
 
     time_dijkstra = []  
     time_astar = []
+    time_wastar = []
 
     start_states = []
     goal_states = []
@@ -77,7 +79,7 @@ def main():
             print()
 
             solved_all_problems = False
-
+        
         start = start_states[i]
         goal = goal_states[i]
     
@@ -99,13 +101,26 @@ def main():
             print()
 
             solved_all_problems = False
+        """
+        start = start_states[i]
+        goal = goal_states[i]
 
+        time_start = time.time()
+        path, cost, expanded_wastar = a_star(start, goal, gridded_map, w=1.5)
+        time_end = time.time()
+        nodes_expanded_wastar.append(expanded_wastar)
+        time_wastar.append(time_end - time_start)
+        """
     if solved_all_problems: print('The implementation successfully passed all test cases.')
 
     from search.plot_results import PlotResults
     plotter = PlotResults()
     plotter.plot_results(nodes_expanded_astar, nodes_expanded_dijkstra, "Nodes Expanded (A*)", "Nodes Expanded (Dijkstra)", "nodes_expanded")
     plotter.plot_results(time_astar, time_dijkstra, "Running Time (A*)", "Running Time (Dijkstra)", "running_time")
+    #plotter.plot_results(nodes_expanded_astar, nodes_expanded_wastar, "Nodes Expanded (A*)", "Nodes Expanded (WA*, w=1.25)","nodes_expanded_wastar")
+    #plotter.plot_results(time_astar, time_wastar,"Running Time (A*)", "Running Time (WA*, w=1.25)","running_time_wastar")
+
+
 
 if __name__ == "__main__":
     main()

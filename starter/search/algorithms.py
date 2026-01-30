@@ -181,7 +181,7 @@ def dijkstras(start_state, goal_state, gridded_map):
     #If we get here, no path was found
     return None, -1, expanded_nodes
 
-def a_star(start_state, goal_state, gridded_map):
+def a_star(start_state, goal_state, gridded_map, w=1.0):
     """
     Implements the A* algorithm to find the lowest-cost path from start_state to goal_state
     on the given gridded_map. The function returns a tuple containing the path found (as a list of states),
@@ -249,7 +249,7 @@ def a_star(start_state, goal_state, gridded_map):
                 
                 #Update the cost of the child because we found a better path to it
                 h = heuristic(child, goal_state)
-                child.set_cost(new_g + h)
+                child.set_cost(new_g + h*w)
                 
 
                 #Push the child into OPEN so that we can expand it later
